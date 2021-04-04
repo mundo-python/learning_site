@@ -1,0 +1,36 @@
+{% extends "courses/layout.html" %}
+
+{% block title %}All{% endblock %}
+
+{% block content %}
+    <div class="row columns">
+        {{ block.super }}
+        {% if user.is_authenticated %}
+        <hr>
+        <a href="{% url 'courses:course_create' %}" class="button">New Course</a>
+        {% endif %}
+    </div>
+<p class="row columns"><strong>Total steps: </strong> {{total.total}}</p>
+    <div class="row">
+        {%  for course in courses %}
+            <div class="small-6 columns">
+                <div class="callout">
+                    <h5><a href="{% url 'courses:detail' pk=course.pk %}">{{ course.title }}</a></h5>
+                    <div class="card-copy">
+                        {{ course.description }}
+                        {% if course.total_steps %}
+
+                            <p> <br><strong>Steps:</strong> {{ course.total_steps }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            {% if forloop.counter|divisibleby:"2" %}
+                </div>
+                <div class="row">
+            {% endif %}
+        {% endfor %}
+    </div>
+
+{% endblock %}

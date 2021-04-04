@@ -1,0 +1,13 @@
+{% extends "courses/layout.html" %}
+{% load course_extras %}
+
+
+{% block title %}Whoops...{% endblock %}
+
+{% block content %}
+<div class="row columns">
+{{ block.super }}
+
+<h1>Whoops! {{ teacher|title }} is not a teacher...</h1>
+{% endblock %}
+</div>
